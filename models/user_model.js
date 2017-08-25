@@ -102,9 +102,8 @@ updateUserLocation = (query) => {
   return new Promise((resolve, reject) => {
       userCollection.updateOne({ID: query['ID']},{ $set:
           {
-              'Angkot.location.coordinates' : [query['longitude'], query['latitude']],
-              'Angkot.JumlahPenumpang' : query['jumlah_penumpang'],
-              'Angkot.LastUpdate' : new Date(query['time'])
+              'Security.location.coordinates' : [query['longitude'], query['latitude']],
+              'Security.LastUpdate' : new Date(query['time'])
           }
       }, function(err, result) {
           if(err){
@@ -130,33 +129,27 @@ checkSession = (sessid) => {
     });
 };
 
-/** get angkot location**/
-getAngkotLocation = () => {
+/** get Security location**/
+getSecurityLocation = () => {
     return new Promise((resolve, reject) => {
         userCollection.find(
             { $and:
                 [
                     { ID_role: 20 },
-                    { Angkot: { $exists: true } },
-                    {"Angkot.location.coordinates": {$ne: [0,0] }}
+                    { Security: { $exists: true } },
+                    {"Security.location.coordinates": {$ne: [0,0] }}
                 ] }
             ).toArray((err, results) =>{
            if(err)reject(err);
            else {
                for(let i = 0; i < results.length; i++){
-                   results[i]['Angkot']['LastUpdate'] = converter.convertISODateToString(results[i]['Angkot']['LastUpdate']);
+                   results[i]['Security']['LastUpdate'] = converter.convertISODateToString(results[i]['Security']['LastUpdate']);
                }
                resolve(results);
            }
         });
     });
 };
-
-
-/** update jumlah penumpang**/
-
-
-
 /** check complete session **/
 checkCompleteSession = (sessid) => {
     return new Promise((resolve, reject) =>{
@@ -263,7 +256,7 @@ insertUser = (query) => {
                     "flag" : 1,
                     "Barcode" : "",
                     "deposit" : 0,
-                    "ID_role" : null,
+                    "ID_role" : 201,
                     "Plat_motor" : null,
                     "ID_ktp" : null,
                     "foto" : null,
@@ -284,19 +277,17 @@ insertUser = (query) => {
 };
 
 
-/** insert user angkot**/
-insertUserAngkot = (query) => {
+
+insertUserSecurity = (query) => {
     return new Promise((resolve, reject) =>{
         let email = query['email'];
         let phonenumber = query['phonenumber'];
-        let trayek = query['trayek'];
-        let trayekID = parseInt(query['trayek_id']);
         let gender = 3;
         let birthday = 'N/A';
         let password = query['password'];
         let name = query['name'];
-        let username = query['platnomor'].toUpperCase();
-        let platNomor = query['platnomor'].toUpperCase();
+        let username = query['idSecurity'].toUpperCase();
+        let idSecurity = query['idSecurity'].toUpperCase();
         autoIncrement.getNextSequence(database, 'tb_user', 'ID', (err, autoIndex) => {
             if(err) reject(err);
             else {
@@ -332,14 +323,9 @@ insertUserAngkot = (query) => {
                     "Nama_foto" : null,
                     "Path_ktp" : null,
                     "Nama_ktp" : null,
-                    "Angkot" : {
+                    "Security" : {
                         "LastUpdate" : new Date(),
-                        "PlatNomor" : platNomor,
-                        "Trayek": {
-                            "Nama": trayek,
-                            "TrayekID" : trayekID
-                        },
-                        "JumlahPenumpang" : 0,
+                        "idSecurity" : idSecurity,
                         "location" : {
                             "type": "Point",
                             "coordinates": [0,0]
@@ -355,7 +341,6 @@ insertUserAngkot = (query) => {
         });
     });
 };
-
 
 
 
@@ -428,9 +413,9 @@ module.exports = {
     changeOnlineStatus:changeOnlineStatus,
     getProfileById:getProfileById,
     insertUser:insertUser,
-    insertUserAngkot:insertUserAngkot,
+    insertUserSecurity:insertUserSecurity,
     findPlatNomor:findPlatNomor,
     insertUser:insertUser,
     updateUserLocation:updateUserLocation,
-    getAngkotLocation:getAngkotLocation
+    getSecurityLocation:getSecurityLocation
 };

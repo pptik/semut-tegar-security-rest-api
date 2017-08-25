@@ -79,8 +79,8 @@ router.post('/register', async(req, res) => {
         }
         if(findemail.length > 0 || findPhone.length > 0) res.status(200).send(validMsg);
         else {
-            let findPlatusername = await userModel.findUserName(query['username']);
-            if(findPlatusername.length > 0) res.status(200).send(commonMessage.username_already);
+            let findusername = await userModel.findUserName(query['username']);
+            if(findusername.length > 0) res.status(200).send(commonMessage.username_already);
             else {
                 await userModel.insertUser(query);
                 res.status(200).send({success: true, message: "Berhasil membuat akun", code: "000"});
@@ -92,6 +92,44 @@ router.post('/register', async(req, res) => {
     }
 });
 
+router.post('/register-security', async(req, res) => {
+    let query = {};
+    let entity = req['body']['entity'];
+    query['password'] = req['body']['password'];
+    query['name'] = req['body']['name'];
+    query['idSecurity'] = req['body']['idSecurity'];
+
+    if(entity === undefined || query['password'] === undefined || query['name'] === undefined )
+        res.status(200).send(commonMessage.body_body_empty);
+    else {
+        try {
+            let findPhone = [], findemail = [], validMsg;
+            if (validator.validatePhone(entity)) {
+                query['phonenumber'] = entity;
+                query['email'] = 'N/A';
+                findPhone = await userModel.findPhoneNumber(query['phonenumber']);
+                validMsg = commonMessage.phone_already;
+            } else if (validator.validateEmail(entity)) {
+                query['phonenumber'] = 'N/A';
+                query['email'] = entity;
+                findemail = await userModel.findEmail(query['email']);
+                validMsg = commonMessage.email_already;
+            }
+            if(findemail.length > 0 || findPhone.length > 0) res.status(200).send(validMsg);
+            else {
+                let findIdSecurity = await userModel.findUserName(query['idSecurity']);
+                if(findIdSecurity.length > 0) res.status(200).send(commonMessage.plat_already);
+                else {
+                    await userModel.insertUserSecurity(query);
+                    res.status(200).send({success: true, message: "Berhasil membuat akun", code: "000"});
+                }
+            }
+        }catch (err) {
+            console.log(err);
+            res.status(200).send(commonMessage.service_not_responding);
+        }
+    }
+});
 
 
 router.post('/status', async(req, res) => {

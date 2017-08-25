@@ -8,7 +8,7 @@ connect = async() => {
     try {
         let connection = await rmq.connect(rmq_config.broker_uri);
         await consume(connection);
-        await broadcaster.broadcastAngkot(connection);
+        await broadcaster.broadcastSecurity(connection);
     }catch (er){
         console.log(err);
     }
@@ -19,14 +19,14 @@ connect = async() => {
 consume = async (connection) => {
     try {
         let channel = await connection.createChannel();
-        await channel.assertExchange(rmq_config.exchange_name, 'topic', {durable : false});
-        let q = await channel.assertQueue(rmq_config.service_queue_name, {exclusive : false});
+        await channel.assertExchange(rmq_config.exchange_name, 'topic', {durable : true});
+        let q = await channel.assertQueue(rmq_config.service_queue_name, {exclusive : true});
         await channel.bindQueue(q.queue, rmq_config.exchange_name, rmq_config.service_route);
         channel.consume(q.queue, (msg) => {
             console.log("=================================================");
             console.log("Incoming msg : "+msg.content.toString());
-            /** update angkot location**/
-            if(msg.fields.routingKey === rmq_config.route_update_angkot){
+            /** update Security location**/
+            if(msg.fields.routingKey === rmq_config.route_update_security){
                 let query = JSON.parse(msg.content.toString());
                 console.log("-------------------------------------------------");
                 console.log('UPDATE LOKASI USER');
