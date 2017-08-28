@@ -17,14 +17,14 @@ router.post('/insert', async(req, res) => {
     }else {
         try {
             let findPanicByIDUser=await panicButtonModel.findByIdUser(UserID);
-            if(findPanicByIDUser>0){
+            if(findPanicByIDUser[0]){
                 await panicButtonModel.updatePanicButton(req.body);
                 await panicButtonModel.insertPanicButtonHistory(req.body);
-                res.status(200).send({success: true, code: "000", message: "berhasil memuat permintaan"});
+                res.status(200).send({success: true, code: "000", message: "berhasil menyimpan data"});
             }else {
                 await panicButtonModel.insertPanicButton(req.body);
                 await panicButtonModel.insertPanicButtonHistory(req.body);
-                res.status(200).send({success: true, code: "000", message: "berhasil memuat permintaan"});
+                res.status(200).send({success: true, code: "000", message: "berhasil menyimpan data"});
             }
         }catch (err){
             console.log(err);
