@@ -58,18 +58,18 @@ initSession = (userID) => {
                     if(results[0]){
                         sessionCollection.updateOne({ID: results[0].ID},{ $set: { EndTime : moment().format('YYYY-MM-DD HH:mm:ss')}},
                             (err, result) => {
-                            if(err) reject(err);
-                            else {
-                                let _query = {UserID: userID, ID: md5(userID+"-"+moment().format('YYYYMMDDHHmmss')),
-                                    StartTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-                                    LastTime:moment().format('YYYY-MM-DD HH:mm:ss'),
-                                    EndTime: "0000-00-00 00:00:00"};
-                                sessionCollection.insertOne(_query, (err, result) => {
-                                    if (err) reject(err);
-                                    else resolve(result);
-                                });
-                            }
-                        });
+                                if(err) reject(err);
+                                else {
+                                    let _query = {UserID: userID, ID: md5(userID+"-"+moment().format('YYYYMMDDHHmmss')),
+                                        StartTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+                                        LastTime:moment().format('YYYY-MM-DD HH:mm:ss'),
+                                        EndTime: "0000-00-00 00:00:00"};
+                                    sessionCollection.insertOne(_query, (err, result) => {
+                                        if (err) reject(err);
+                                        else resolve(result);
+                                    });
+                                }
+                            });
                     }else {
                         let _query = {UserID: userID, ID: md5(userID+"-"+moment().format('YYYYMMDDHHmmss')),
                             StartTime: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -81,7 +81,7 @@ initSession = (userID) => {
                         });
                     }
                 }
-        });
+            });
     });
 };
 
@@ -99,21 +99,20 @@ getSession = (userID) => {
 
 
 updateUserLocation = (query) => {
-  return new Promise((resolve, reject) => {
-      userCollection.updateOne({ID: query['ID']},{ $set:
-          {
-              'Security.location.coordinates' : [query['longitude'], query['latitude']],
-              'Security.LastUpdate' : new Date(query['time']),
-              'Security.Tipe':query.tipe
-          }
-      }, function(err, result) {
-          if(err){
-              reject(err);
-          }else {
-             resolve(result);
-          }
-      });
-  });
+    return new Promise((resolve, reject) => {
+        userCollection.updateOne({ID: query['ID']},{ $set:
+            {
+                'Security.location.coordinates' : [query['longitude'], query['latitude']],
+                'Security.LastUpdate' : new Date(query['time'])
+            }
+        }, function(err, result) {
+            if(err){
+                reject(err);
+            }else {
+                resolve(result);
+            }
+        });
+    });
 };
 
 
@@ -124,8 +123,8 @@ checkSession = (sessid) => {
             .toArray((err, results) => {
                 if (err) reject(err);
                 else
-                    if(results[0]) resolve (results[0].UserID);
-                    else resolve(null);
+                if(results[0]) resolve (results[0].UserID);
+                else resolve(null);
             });
     });
 };
@@ -136,18 +135,18 @@ getSecurityLocation = () => {
         userCollection.find(
             { $and:
                 [
-                    { ID_role: 20 },
+                    { ID_role: 202 },
                     { Security: { $exists: true } },
                     {"Security.location.coordinates": {$ne: [0,0] }}
                 ] }
-            ).toArray((err, results) =>{
-           if(err)reject(err);
-           else {
-               for(let i = 0; i < results.length; i++){
-                   results[i]['Security']['LastUpdate'] = converter.convertISODateToString(results[i]['Security']['LastUpdate']);
-               }
-               resolve(results);
-           }
+        ).toArray((err, results) =>{
+            if(err)reject(err);
+            else {
+                for(let i = 0; i < results.length; i++){
+                    results[i]['Security']['LastUpdate'] = converter.convertISODateToString(results[i]['Security']['LastUpdate']);
+                }
+                resolve(results);
+            }
         });
     });
 };
@@ -156,22 +155,22 @@ checkCompleteSession = (sessid) => {
     return new Promise((resolve, reject) =>{
         sessionCollection.find({ID: sessid, "EndTime": "0000-00-00 00:00:00"})
             .toArray((err, results) => {
-            if (err) reject(err);
-            else
+                if (err) reject(err);
+                else
                 if(results[0]) {
                     userCollection.find({ID: results[0].UserID})
                         .toArray((err, ress) => {
-                        if(err)reject(err);
-                        else resolve(
-                            {
-                                UserID: results[0].UserID,
-                                Name: ress[0].Name,
-                                Email: ress[0].Email,
-                                username : ress[0].username
-                            });
-                    });
+                            if(err)reject(err);
+                            else resolve(
+                                {
+                                    UserID: results[0].UserID,
+                                    Name: ress[0].Name,
+                                    Email: ress[0].Email,
+                                    username : ress[0].username
+                                });
+                        });
                 }else resolve(null);
-        });
+            });
     });
 };
 
@@ -194,8 +193,8 @@ getProfileById = (iduser) => {
         let _id = parseInt(iduser);
         userCollection.find({ID: _id})
             .toArray((err, results) => {
-            if (err) reject(err);
-            else
+                if (err) reject(err);
+                else
                 if(results[0]) {
                     let data = results[0];
                     delete data['Password'];
@@ -216,7 +215,7 @@ getProfileById = (iduser) => {
                     delete data['Status_online'];
                     resolve(data);
                 }else resolve(null);
-        });
+            });
     });
 };
 
