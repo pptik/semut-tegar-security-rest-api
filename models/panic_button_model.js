@@ -12,7 +12,7 @@ const converter = require('../utilities/converter');
 /** find list Panic button by id user **/
 findByIdUser = (UserID) => {
     return new Promise((resolve, reject)=>{
-        panicButtonCollection.find({id_user :UserID}).toArray( (err, results) => {
+        panicButtonCollection.find({id_user :parseInt(UserID)}).toArray( (err, results) => {
             if(err)reject(err);
             else resolve(results);
         });
@@ -21,7 +21,7 @@ findByIdUser = (UserID) => {
 /** find list Panic button history by id user **/
 findHistoryByIdUser = (UserID) => {
     return new Promise((resolve, reject)=>{
-        panicButtonHistoryCollection.find({id_user :UserID}).toArray( (err, results) => {
+        panicButtonHistoryCollection.find({id_user :parseInt(UserID)}).toArray( (err, results) => {
             if(err)reject(err);
             else resolve(results);
         });
@@ -29,11 +29,11 @@ findHistoryByIdUser = (UserID) => {
 };
 updatePanicButton = (query) => {
     return new Promise((resolve, reject) => {
-        panicButtonCollection.updateOne({id_user: query.UserID},{ $set:
+        panicButtonCollection.updateOne({id_user: parseInt(query.UserID)},{ $set:
             {
                 location : {
                     "type": "Point",
-                    "coordinates": [query.Longitude,query.Latitude]
+                    "coordinates": [parseFloat(query.Longitude),parseFloat(query.Latitude)]
                 },
                 updated_at : new Date()
             }
@@ -49,11 +49,11 @@ updatePanicButton = (query) => {
 insertPanicButton = (query) => {
     return new Promise((resolve, reject) =>{
         let panicQuery = {
-            id_user:query.UserID,
+            id_user:parseInt(query.UserID),
             nama_user:query.Nama,
             location : {
                 "type": "Point",
-                "coordinates": [query.Longitude,query.Latitude]
+                "coordinates": [parseFloat(query.Longitude),parseFloat(query.Latitude)]
             },
             created_at:new Date()
         };
@@ -66,14 +66,12 @@ insertPanicButton = (query) => {
 insertPanicButtonHistory = (query) => {
     return new Promise((resolve, reject) =>{
         let panicQuery = {
-            id_user:query.UserID,
+            id_user:parseInt(query.UserID),
             nama_user:query.Nama,
             location : {
                 "type": "Point",
-                "coordinates": [query.Longitude,query.Latitude]
+                "coordinates": [parseFloat(query.Longitude),parseFloat(query.Latitude)]
             },
-            Latitude:query.Latitude,
-            Longitude:query.Longitude,
             created_at:new Date()
         };
         panicButtonHistoryCollection.insertOne(panicQuery, (err, result) => {
