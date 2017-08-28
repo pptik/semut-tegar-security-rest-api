@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26e412bd-3ac4-4473-9b62-443f764a1de5" name="Default" comment="delete jumlah penumpang">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/configs/database.json" afterPath="" />
+    <list default="true" id="26e412bd-3ac4-4473-9b62-443f764a1de5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configs/database.json" afterPath="$PROJECT_DIR$/configs/database.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configs/rmq.json" afterPath="$PROJECT_DIR$/configs/rmq.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/panicButton.js" afterPath="$PROJECT_DIR$/routes/panicButton.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="panicButton.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="panicButton.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/panicButton.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="26" column="45" lean-forward="false" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+            <state relative-caret-position="75">
+              <caret line="5" column="65" lean-forward="false" selection-start-line="5" selection-start-column="65" selection-end-line="5" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -59,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rmq.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rmq.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/configs/rmq.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="120">
+              <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -92,8 +93,8 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="90" column="67" lean-forward="true" selection-start-line="89" selection-start-column="8" selection-end-line="90" selection-end-column="67" />
+            <state relative-caret-position="30">
+              <caret line="2" column="50" lean-forward="true" selection-start-line="2" selection-start-column="50" selection-end-line="3" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -113,7 +114,7 @@
         <entry file="file://$PROJECT_DIR$/configs/database.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -154,12 +155,12 @@
         <option value="$PROJECT_DIR$/rmq/connection.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/models/panic_button_model.js" />
-        <option value="$PROJECT_DIR$/routes/panicButton.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/models/user_model.js" />
         <option value="$PROJECT_DIR$/rmq/users.js" />
         <option value="$PROJECT_DIR$/configs/database.json" />
         <option value="$PROJECT_DIR$/configs/rmq.json" />
+        <option value="$PROJECT_DIR$/routes/panicButton.js" />
       </list>
     </option>
   </component>
@@ -374,7 +375,7 @@
       <option name="presentableId" value="Default" />
       <updated>1503645207440</updated>
       <workItem from="1503645208723" duration="3061000" />
-      <workItem from="1503901879017" duration="5984000" />
+      <workItem from="1503901879017" duration="6748000" />
     </task>
     <task id="LOCAL-00001" summary="ignore setting">
       <created>1503902015192</created>
@@ -418,11 +419,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503910056735</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="delete config">
+      <created>1503910278694</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1503910278694</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9045000" />
+    <option name="totallyTimeSpent" value="9809000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -483,7 +491,8 @@
     <MESSAGE value="panicbutton" />
     <MESSAGE value="ignore setting" />
     <MESSAGE value="delete jumlah penumpang" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete jumlah penumpang" />
+    <MESSAGE value="delete config" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete config" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -630,22 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="90" column="67" lean-forward="true" selection-start-line="89" selection-start-column="8" selection-end-line="90" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/panicButton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="45" lean-forward="false" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -662,6 +655,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/configs/database.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/rmq.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rmq/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -670,18 +679,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configs/database.json">
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="2" column="50" lean-forward="true" selection-start-line="2" selection-start-column="50" selection-end-line="3" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configs/rmq.json">
+    <entry file="file://$PROJECT_DIR$/routes/panicButton.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="75">
+          <caret line="5" column="65" lean-forward="false" selection-start-line="5" selection-start-column="65" selection-end-line="5" selection-end-column="65" />
           <folding />
         </state>
       </provider>

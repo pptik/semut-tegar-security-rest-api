@@ -3,6 +3,7 @@ const router = express.Router();
 const md5 = require('md5');
 const cors = require('cors');
 const panicButtonModel = require('../models/panic_button_model');
+const commonMessage = require('../configs/common_messages.json');
 
 
 router.post('/insert', async(req, res) => {
