@@ -75,8 +75,10 @@ database.connect().then(db =>{
     /** define routes**/
     let index = require('./routes/index');
     let users = require('./routes/users');
+    let panicButton = require('./routes/panicButton');
     app.use('/', index);
     app.use('/users', users);
+    app.use('/panic/button', panicButton);
 
     /** if route not found**/
     app.use((req, res) => {

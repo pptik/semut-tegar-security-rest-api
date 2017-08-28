@@ -7,7 +7,7 @@ updateUserLocation = (query) => {
         let latitude = query['latitude'];
         let longitude = query['longitude'];
         let time = query['time'];
-        let jumlahpenumpang = query['jumlah_penumpang'];
+        let tipe = query['tipe'];
         if(sessionID === undefined || latitude === undefined
             || longitude === undefined || time === undefined || jumlahpenumpang === undefined){
             resolve(commonMessage.body_body_empty);
