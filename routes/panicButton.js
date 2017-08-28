@@ -7,6 +7,7 @@ const commonMessage = require('../configs/common_messages.json');
 
 
 router.post('/insert', async(req, res) => {
+    console.log(req.body);
     let UserID=req.body.UserID;
     let Nama=req.body.Nama;
     let Latitude=req.body.Latitude;
@@ -19,9 +20,11 @@ router.post('/insert', async(req, res) => {
             if(findPanicByIDUser>0){
                 await panicButtonModel.updatePanicButton(req.body);
                 await panicButtonModel.insertPanicButtonHistory(req.body);
+                res.status(200).send({success: true, code: "000", message: "berhasil memuat permintaan"});
             }else {
                 await panicButtonModel.insertPanicButton(req.body);
                 await panicButtonModel.insertPanicButtonHistory(req.body);
+                res.status(200).send({success: true, code: "000", message: "berhasil memuat permintaan"});
             }
         }catch (err){
             console.log(err);
