@@ -115,6 +115,23 @@ updateUserLocation = (query) => {
         });
     });
 };
+updateDeviceLocation = (query) => {
+    return new Promise((resolve, reject) => {
+        userCollection.updateOne({'Security.mac_id': query.mac_id},{ $set:
+            {
+                'Security.location.coordinates' : [query['longitude'], query['latitude']],
+                'Security.LastUpdate' : new Date(query['time']),
+                'Security.tipe' : parseInt(query.tipe)
+            }
+        }, function(err, result) {
+            if(err){
+                reject(err);
+            }else {
+                resolve(result);
+            }
+        });
+    });
+};
 
 
 /** check session **/
@@ -327,6 +344,71 @@ insertUserSecurity = (query) => {
                     "Security" : {
                         "LastUpdate" : new Date(),
                         "idSecurity" : idSecurity,
+                        "tipe":0,
+                        "location" : {
+                            "type": "Point",
+                            "coordinates": [0,0]
+                        }
+                    }
+
+                };
+                userCollection.insertOne(userQuery, (err, result) => {
+                    if(err) reject(err);
+                    else resolve(result);
+                });
+            }
+        });
+    });
+};
+insertDeviceSecurity = (query) => {
+    return new Promise((resolve, reject) =>{
+        let email = "N/A";
+        let phonenumber = "N/A";
+        let gender = 3;
+        let birthday = 'N/A';
+        let password ="N/A";
+        let name = "N/A";
+        let username = "N/A";
+        let idSecurity = "N/A";
+        let MacID = query.mac_id;
+        autoIncrement.getNextSequence(database, 'tb_user', 'ID', (err, autoIndex) => {
+            if(err) reject(err);
+            else {
+                let userQuery = {
+                    "ID" : autoIndex,
+                    "Name" : name,
+                    "username" : username,
+                    "Email" : email,
+                    "CountryCode" : 62,
+                    "PhoneNumber" : phonenumber,
+                    "Gender" : gender,
+                    "Birthday" : birthday,
+                    "Password" : md5(password),
+                    "Joindate" : moment().format('YYYY-MM-DD HH:mm:ss'),
+                    "Poin" : 100,
+                    "PoinLevel" : 100,
+                    "AvatarID" : gender,
+                    "facebookID" : null,
+                    "Verified" : 0,
+                    "VerifiedNumber" : null,
+                    "Visibility" : 0,
+                    "Reputation" : 0,
+                    "flag" : 1,
+                    "Barcode" : "",
+                    "deposit" : 0,
+                    "ID_role" : 202,
+                    "Plat_motor" : null,
+                    "ID_ktp" : null,
+                    "foto" : null,
+                    "PushID" : "no id",
+                    "Status_online" : null,
+                    "Path_foto" : null,
+                    "Nama_foto" : null,
+                    "Path_ktp" : null,
+                    "Nama_ktp" : null,
+                    "Security" : {
+                        "LastUpdate" : new Date(),
+                        "mac_id" : MacID,
                         "tipe":0,
                         "location" : {
                             "type": "Point",
