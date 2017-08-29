@@ -9,7 +9,7 @@ updateUserLocation = (query) => {
         let time = query['time'];
         let tipe = query['tipe'];
         if(sessionID === undefined || latitude === undefined
-            || longitude === undefined || time === undefined){
+            || longitude === undefined || time === undefined||tipe===undefined){
             resolve(commonMessage.body_body_empty);
         }else {
             try{

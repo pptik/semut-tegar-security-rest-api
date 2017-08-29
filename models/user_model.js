@@ -103,7 +103,8 @@ updateUserLocation = (query) => {
         userCollection.updateOne({ID: query['ID']},{ $set:
             {
                 'Security.location.coordinates' : [query['longitude'], query['latitude']],
-                'Security.LastUpdate' : new Date(query['time'])
+                'Security.LastUpdate' : new Date(query['time']),
+                'Security.tipe' : parseInt(query.tipe)
             }
         }, function(err, result) {
             if(err){
@@ -326,6 +327,7 @@ insertUserSecurity = (query) => {
                     "Security" : {
                         "LastUpdate" : new Date(),
                         "idSecurity" : idSecurity,
+                        "tipe":0,
                         "location" : {
                             "type": "Point",
                             "coordinates": [0,0]
