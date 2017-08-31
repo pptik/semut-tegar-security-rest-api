@@ -1,4 +1,5 @@
 const userModel = require('../models/user_model');
+const panicButtonModel = require('../models/panic_button_model');
 const configs = require('../configs/rmq.json');
 
 /** broadcast lokasi Security **/
@@ -12,6 +13,7 @@ broadcastSecurity = async(connection) => {
         setInterval(async function () {
             let test = {test : "test"}.toString();
             let dataSecurity = await userModel.getSecurityLocation();
+            let dataPanicButton=await panicButtonModel.findAllPanicButton();
             let msg = {Security : dataSecurity};
             msg = JSON.stringify(msg);
             await ch.publish(configs.exchange_name, configs.broadcast_route, new Buffer(msg));

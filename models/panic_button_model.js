@@ -18,6 +18,15 @@ findByIdUser = (UserID) => {
         });
     });
 };
+/** find list Panic button by id user **/
+findAllPanicButton = () => {
+    return new Promise((resolve, reject)=>{
+        panicButtonCollection.find({}).toArray( (err, results) => {
+            if(err)reject(err);
+            else resolve(results);
+        });
+    });
+};
 /** find list Panic button history by id user **/
 findHistoryByIdUser = (UserID) => {
     return new Promise((resolve, reject)=>{
@@ -87,5 +96,6 @@ module.exports = {
     insertPanicButton:insertPanicButton,
     updatePanicButton:updatePanicButton,
     insertPanicButtonHistory:insertPanicButtonHistory,
-    findHistoryByIdUser:findHistoryByIdUser
+    findHistoryByIdUser:findHistoryByIdUser,
+	findAllPanicButton:findAllPanicButton
 };
